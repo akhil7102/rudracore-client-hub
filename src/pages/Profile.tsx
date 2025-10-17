@@ -135,11 +135,11 @@ export default function Profile() {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-2xl mx-auto space-y-8">
+      <main className="container mx-auto px-4 py-6 md:py-8">
+        <div className="max-w-2xl mx-auto space-y-6 md:space-y-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">Profile Settings</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">Profile Settings</h1>
+            <p className="text-sm md:text-base text-muted-foreground">
               Manage your account information
             </p>
           </div>

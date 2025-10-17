@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -94,11 +94,11 @@ export default function Orders() {
     <div className="min-h-screen bg-gradient-to-br from-primary/5 via-background to-accent/5">
       <Navbar />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-6xl mx-auto space-y-8">
+      <main className="container mx-auto px-4 py-6 md:py-8">
+        <div className="max-w-6xl mx-auto space-y-6 md:space-y-8">
           <div>
-            <h1 className="text-4xl font-bold mb-2">Your Orders</h1>
-            <p className="text-muted-foreground">
+            <h1 className="text-3xl md:text-4xl font-bold mb-2">Your Orders</h1>
+            <p className="text-sm md:text-base text-muted-foreground">
               Track the status of your projects
             </p>
           </div>
@@ -107,9 +107,9 @@ export default function Orders() {
             <Card>
               <CardContent className="py-16 text-center">
                 <p className="text-muted-foreground mb-4">No orders yet</p>
-                <a href="/services" className="text-primary hover:underline">
+                <Link to="/services" className="text-primary hover:underline">
                   Browse Services
-                </a>
+                </Link>
               </CardContent>
             </Card>
           ) : (

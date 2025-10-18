@@ -53,6 +53,11 @@ export default {
       },
       backgroundImage: {
         'gradient-primary': 'var(--primary-gradient)',
+        'gradient-hero': 'var(--hero-gradient)',
+      },
+      boxShadow: {
+        'glow-primary': 'var(--glow-primary)',
+        'glow-accent': 'var(--glow-accent)',
       },
       borderRadius: {
         lg: "var(--radius)",

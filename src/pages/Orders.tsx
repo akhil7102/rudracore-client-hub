@@ -124,8 +124,18 @@ export default function Orders() {
                           {order.services?.description}
                         </CardDescription>
                       </div>
-                      <Badge className={getStatusColor(order.status)}>
+                      <Badge 
+                        className={`${getStatusColor(order.status)} ${
+                          order.status === "completed" ? "cursor-pointer hover:opacity-80" : ""
+                        }`}
+                        onClick={() => {
+                          if (order.status === "completed") {
+                            navigate(`/delivery?order=${order.id}`);
+                          }
+                        }}
+                      >
                         {order.status}
+                        {order.status === "completed" && " ✓"}
                       </Badge>
                     </div>
                   </CardHeader>

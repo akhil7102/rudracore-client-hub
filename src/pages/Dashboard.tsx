@@ -13,6 +13,7 @@ export default function Dashboard() {
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [orderCount, setOrderCount] = useState(0);
+  const [servicesCount, setServicesCount] = useState(0);
 
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
@@ -66,6 +67,40 @@ export default function Dashboard() {
     setOrderCount(count || 0);
   };
 
+  const fetchServicesCount = async () => {
+    const { count } = await supabase
+      .from("services")
+      .select("*", { count: "exact", head: true });
+    
+    setServicesCount(count || 0);
+  };
+
+  useEffect(() => {
+    // Fetch initial services count
+    fetchServicesCount();
+
+    // Subscribe to real-time changes on services table
+    const channel = supabase
+      .channel('services-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'services'
+        },
+        () => {
+          // Refetch count when services are added, updated, or deleted
+          fetchServicesCount();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, []);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -107,7 +142,7 @@ export default function Dashboard() {
                 <Package className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">7</div>
+                <div className="text-2xl font-bold">{servicesCount}</div>
                 <p className="text-xs text-muted-foreground">Professional solutions</p>
               </CardContent>
             </Card>

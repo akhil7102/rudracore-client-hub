@@ -76,6 +76,21 @@ export default function Auth() {
     const email = formData.get("signup-email") as string;
     const password = formData.get("signup-password") as string;
     const fullName = formData.get("full-name") as string;
+    const phone = formData.get("phone") as string;
+    const discordId = formData.get("discord-id") as string;
+    const instagramId = formData.get("instagram-id") as string;
+    const linkedinId = formData.get("linkedin-id") as string;
+
+    // Basic validation
+    if (!phone || phone.trim().length === 0) {
+      toast({
+        title: "Error",
+        description: "Phone number is required",
+        variant: "destructive",
+      });
+      setLoading(false);
+      return;
+    }
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -83,6 +98,10 @@ export default function Auth() {
       options: {
         data: {
           full_name: fullName,
+          phone: phone,
+          discord_id: discordId || '',
+          instagram_id: instagramId || '',
+          linkedin_id: linkedinId || '',
         },
         emailRedirectTo: `${window.location.origin}/dashboard`,
       },
@@ -159,7 +178,7 @@ export default function Auth() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email">Email *</Label>
                   <Input
                     id="signup-email"
                     name="signup-email"
@@ -169,7 +188,44 @@ export default function Auth() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="phone">Phone Number *</Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder="+1 (555) 000-0000"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="discord-id">Discord ID</Label>
+                  <Input
+                    id="discord-id"
+                    name="discord-id"
+                    type="text"
+                    placeholder="username#1234"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="instagram-id">Instagram ID</Label>
+                  <Input
+                    id="instagram-id"
+                    name="instagram-id"
+                    type="text"
+                    placeholder="@username"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="linkedin-id">LinkedIn ID</Label>
+                  <Input
+                    id="linkedin-id"
+                    name="linkedin-id"
+                    type="text"
+                    placeholder="linkedin.com/in/username"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signup-password">Password *</Label>
                   <Input
                     id="signup-password"
                     name="signup-password"

@@ -16,6 +16,7 @@ export type Database = {
     Tables: {
       orders: {
         Row: {
+          admin_notes: string | null
           created_at: string
           delivery_link: string | null
           details: string | null
@@ -28,6 +29,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          admin_notes?: string | null
           created_at?: string
           delivery_link?: string | null
           details?: string | null
@@ -40,6 +42,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          admin_notes?: string | null
           created_at?: string
           delivery_link?: string | null
           details?: string | null
@@ -65,24 +68,36 @@ export type Database = {
         Row: {
           company_name: string | null
           created_at: string
+          discord_id: string | null
+          email: string | null
           full_name: string | null
           id: string
+          instagram_id: string | null
+          linkedin_id: string | null
           phone: string | null
           updated_at: string
         }
         Insert: {
           company_name?: string | null
           created_at?: string
+          discord_id?: string | null
+          email?: string | null
           full_name?: string | null
           id: string
+          instagram_id?: string | null
+          linkedin_id?: string | null
           phone?: string | null
           updated_at?: string
         }
         Update: {
           company_name?: string | null
           created_at?: string
+          discord_id?: string | null
+          email?: string | null
           full_name?: string | null
           id?: string
+          instagram_id?: string | null
+          linkedin_id?: string | null
           phone?: string | null
           updated_at?: string
         }
